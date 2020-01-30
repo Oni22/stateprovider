@@ -35,19 +35,10 @@ class _StateProviderListenerState extends State<StateProviderListener> {
     return StreamBuilder<StateModel>(
       stream: widget.model.state,
       builder: (context,snapshot) {
-        if(snapshot.data != null) {
           return StateProvider(
             state: snapshot.data,
             child: widget.child,
           );
-        }
-        else {
-          return Scaffold(
-            body: Center(
-              child: Text(""),
-            ),
-          );
-        }
       },
     );
   }
