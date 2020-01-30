@@ -42,7 +42,11 @@ class _StateProviderListenerState extends State<StateProviderListener> {
           );
         }
         else {
-          return Scaffold();
+          return Scaffold(
+            body: Center(
+              child: Text(""),
+            ),
+          );
         }
       },
     );
