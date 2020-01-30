@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mobilepkg/state_management/statemodel.dart';
 
 class StateProviderListener extends StatefulWidget {
@@ -41,9 +42,8 @@ class _StateProviderListenerState extends State<StateProviderListener> {
           );
         }
         else {
-          return Container();
+          return Scaffold();
         }
-        
       },
     );
   }
