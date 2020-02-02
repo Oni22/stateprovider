@@ -16,7 +16,7 @@ class StatefulProvider extends StatefulWidget {
   _StatefulProviderState createState() => _StatefulProviderState();
 }
 
-class _StatefulProviderState<T> extends State<StatefulProvider> {
+class _StatefulProviderState extends State<StatefulProvider> {
   
   @override
   void initState() {
@@ -67,6 +67,6 @@ class StateProvider extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType(aspect: StateProvider);
 
   @override
-  bool updateShouldNotify(StateProvider old) => old.store != store;
+  bool updateShouldNotify(StateProvider old) => true;
   
 }
