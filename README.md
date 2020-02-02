@@ -1,6 +1,6 @@
 # StateProvider for Flutter
 
-An easy and lightweight StateProvider for handling global data. This Plugin wraps an InheritedWidget into a StreamBuilder for updating the UI if any changes appears in InheritedWidget.
+A lightweight StateProvider for handling global data. This Plugin wraps an InheritedWidget into a StreamBuilder for updating the UI if any changes appears in the InheritedWidget.
 
 ## Getting Started
 
