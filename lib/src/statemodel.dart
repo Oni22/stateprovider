@@ -6,11 +6,7 @@ class StreamStore<T> {
   Stream<T> get stream => _storeController.stream;
   StreamSink get _sink => _storeController.sink;
 
-  StreamStore() {
-    _sink.add(T);
-  }
-
-  void notify() => _sink.add(T);
+  void notify(T model) => _sink.add(model);
 
   void dispose(){
     _storeController.close();
