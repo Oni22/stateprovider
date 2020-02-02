@@ -1,6 +1,6 @@
 name: stateprovider
 description: A lightweight StateProvider for handling global data. This Plugin wraps an InheritedWidget into a StreamBuilder for updating the UI if any changes appears in the InheritedWidget.
-version: 0.5.0
+version: 0.5.1
 author: Onur Oezkan
 homepage: https://www.onurozkan.net/
 

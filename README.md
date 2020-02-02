@@ -49,7 +49,7 @@ void main() => runApp(
 ```
 
 
-### 4. Now inside your widget you can use your data with the StateProvider class:
+#### 4. Now inside your widget you can use your data with the StateProvider class:
 
 ```dart
 StateProvider.of(context).getState<MyModel>().setAge(34)
