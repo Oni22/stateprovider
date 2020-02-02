@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stateprovider/src/statemodel.dart';
+import 'package:stateprovider/stateprovider.dart';
 
-class StatefulProvider extends StatefulWidget {
+class StatefulProvider<T> extends StatefulWidget {
 
-  final StreamStore store;
+  final StreamStore<T> store;
   final Widget child;
 
   StatefulProvider({
@@ -13,10 +13,10 @@ class StatefulProvider extends StatefulWidget {
   });
 
   @override
-  _StatefulProviderState createState() => _StatefulProviderState();
+  _StatefulProviderState<T> createState() => _StatefulProviderState<T>();
 }
 
-class _StatefulProviderState extends State<StatefulProvider> {
+class _StatefulProviderState<T> extends State<StatefulProvider> {
   
   @override
   void initState() {
@@ -32,11 +32,11 @@ class _StatefulProviderState extends State<StatefulProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<StreamStore>(
+    return StreamBuilder<StreamStore<T>>(
       stream: widget.store.stream,
       builder: (context,snapshot) {
         if(snapshot.data != null) {
-          return StateProvider(
+          return StateProvider<T>(
             store: snapshot.data,
             child: widget.child,
           );
@@ -54,11 +54,11 @@ class _StatefulProviderState extends State<StatefulProvider> {
 
 }
 
-class StateProvider extends InheritedWidget {
+class StateProvider<T> extends InheritedWidget {
   
-  final StreamStore store;
+  final StreamStore<T> store;
 
-  T getState<T>() => store as T;
+  V getState<V>() => store as V;
 
   StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);
