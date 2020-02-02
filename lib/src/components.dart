@@ -58,15 +58,15 @@ class StateProvider<T> extends InheritedWidget {
   
   final StreamStore<T> store;
 
-  T getState<T>() => store as T;
+  V getState<V>() => store as V;
 
   StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);
 
-  static StateProvider of(BuildContext context) =>
+  static StateProvider<T> of<T>(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: StateProvider);
 
   @override
-  bool updateShouldNotify(StateProvider old) => true;
+  bool updateShouldNotify(StateProvider<T> old) => true;
   
 }
