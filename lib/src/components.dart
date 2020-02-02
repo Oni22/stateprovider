@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stateprovider/src/statemodel.dart';
 
-class StatefulProvider<T> extends StatefulWidget {
+class StatefulProvider extends StatefulWidget {
 
   final StreamStore store;
   final Widget child;
@@ -13,7 +13,7 @@ class StatefulProvider<T> extends StatefulWidget {
   });
 
   @override
-  _StatefulProviderState<T> createState() => _StatefulProviderState<T>();
+  _StatefulProviderState createState() => _StatefulProviderState();
 }
 
 class _StatefulProviderState<T> extends State<StatefulProvider> {
@@ -21,7 +21,7 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
   @override
   void initState() {
     super.initState();
-    widget.store.init(widget.store);
+    widget.store.notify(widget.store);
   }
 
   @override
