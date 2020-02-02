@@ -1,17 +1,19 @@
 import 'dart:async';
 
-class StateModel<T> {
+class StreamStore<T> {
 
-  final _stateController = StreamController<T>();
-  Stream<T> get state => _stateController.stream;
+  final _storeController = StreamController<T>();
+  Stream<T> get stream => _storeController.stream;
+  StreamSink get _sink => _storeController.sink;
 
-  void initState(T model) {
-    _stateController.add(model);
+  StreamStore() {
+    notify();
   }
-  void notify(T model) => _stateController.sink.add(model);
+
+  void notify() => _sink.add(this as T);
 
   void dispose(){
-    _stateController.close();
+    _storeController.close();
   }
 
 }

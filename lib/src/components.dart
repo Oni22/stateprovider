@@ -4,11 +4,11 @@ import 'package:stateprovider/src/statemodel.dart';
 
 class StatefulProvider<T> extends StatefulWidget {
 
-  final StateModel model;
+  final StreamStore store;
   final Widget child;
 
   StatefulProvider({
-    this.model,
+    this.store,
     this.child
   });
 
@@ -20,24 +20,23 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
   
   @override
   void initState() {
-    widget.model.initState(widget.model);
     super.initState();
   }
 
   @override
   void dispose() { 
-    widget.model.dispose();
+    widget.store.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<StateModel>(
-      stream: widget.model.state,
+    return StreamBuilder<StreamStore>(
+      stream: widget.store.stream,
       builder: (context,snapshot) {
         if(snapshot.data != null) {
-          return StateProvider<T>(
-            state: snapshot.data,
+          return StateProvider(
+            store: snapshot.data,
             child: widget.child,
           );
         }
@@ -54,19 +53,19 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
 
 }
 
-class StateProvider<T> extends InheritedWidget {
+class StateProvider extends InheritedWidget {
   
-  final StateModel state;
+  final StreamStore store;
 
-  T getState<T>() => state as T;
+  T getState<T>() => store as T;
 
-  StateProvider({Key key, this.state, Widget child})
+  StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);
 
   static StateProvider of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: StateProvider);
 
   @override
-  bool updateShouldNotify(StateProvider old) => old.state != state;
+  bool updateShouldNotify(StateProvider old) => old.store != store;
   
 }
