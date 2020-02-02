@@ -58,7 +58,7 @@ class StateProvider<T> extends InheritedWidget {
   
   final StreamStore<T> store;
 
-  V getState<V>() => store as V;
+  T getState<T>() => store as T;
 
   StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);
