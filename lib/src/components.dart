@@ -2,21 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stateprovider/src/statemodel.dart';
 
-class StateProvider<T> extends StatefulWidget {
+class StatefulProvider<T> extends StatefulWidget {
 
   final StateModel model;
   final Widget child;
 
-  StateProvider({
+  StatefulProvider({
     this.model,
     this.child
   });
 
   @override
-  _StateProviderState<T> createState() => _StateProviderState<T>();
+  _StatefulProviderState<T> createState() => _StatefulProviderState<T>();
 }
 
-class _StateProviderState<T> extends State<StateProvider> {
+class _StatefulProviderState<T> extends State<StatefulProvider> {
   
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _StateProviderState<T> extends State<StateProvider> {
       stream: widget.model.state,
       builder: (context,snapshot) {
         if(snapshot.data != null) {
-          return _InheritedStateWidget<T>(
+          return StateProvider<T>(
             state: snapshot.data,
             child: widget.child,
           );
@@ -54,19 +54,19 @@ class _StateProviderState<T> extends State<StateProvider> {
 
 }
 
-class _InheritedStateWidget<T> extends InheritedWidget {
+class StateProvider<T> extends InheritedWidget {
   
   final StateModel state;
 
   T getState<T>() => state as T;
 
-  _InheritedStateWidget({Key key, this.state, Widget child})
+  StateProvider({Key key, this.state, Widget child})
       : super(key: key, child: child);
 
-  static _InheritedStateWidget of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType(aspect: _InheritedStateWidget);
+  static StateProvider of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType(aspect: StateProvider);
 
   @override
-  bool updateShouldNotify(_InheritedStateWidget old) => old.state != state;
+  bool updateShouldNotify(StateProvider old) => old.state != state;
   
 }
