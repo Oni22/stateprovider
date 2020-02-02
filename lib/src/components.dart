@@ -21,6 +21,7 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
   @override
   void initState() {
     super.initState();
+    widget.store.notify(widget.store);
   }
 
   @override
