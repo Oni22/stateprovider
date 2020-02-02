@@ -4,7 +4,7 @@ import 'package:stateprovider/stateprovider.dart';
 
 class StatefulProvider<T> extends StatefulWidget {
 
-  final StreamStore<T> store;
+  final Store<T> store;
   final Widget child;
 
   StatefulProvider({
@@ -32,7 +32,7 @@ class _StatefulProviderState extends State<StatefulProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<StreamStore>(
+    return StreamBuilder<Store>(
       stream: widget.store.stream,
       builder: (context,snapshot) {
         if(snapshot.data != null) {
@@ -56,9 +56,9 @@ class _StatefulProviderState extends State<StatefulProvider> {
 
 class StateProvider extends InheritedWidget {
   
-  final StreamStore store;
+  final Store store;
 
-  T getState<T extends StreamStore>() => store as T;
+  T getState<T extends Store>() => store as T;
 
   StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-class StreamStore<T> {
+class Store<T> {
 
   final _streamController = StreamController<T>();
   Stream<T> get stream => _streamController.stream;
