@@ -1,14 +1,60 @@
-# mobilepkg
+# StateProvider for Flutter
 
-A new Flutter package project.
+An easy and lightweight StateProvider for handling global data. This Plugin wraps an InheritedWidget into a StreamBuilder for updating the UI if any changes appears in InheritedWidget.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+#### 1. Import stateprovider
+
+```dart 
+import 'package:stateprovider/stateprovider.dart';
+```
+
+
+#### 2. Create a Model which extends the StreamStore class. Add your custom attributes and functions. Call notify(this) in every function where you want to update the state.
+
+```dart
+class MyModel extends StreamStore<MyModel> {
+
+  String name = "";
+  int age = 0; 
+
+  //stores only the new data but doesn't update the ui
+  void setName(String name) {
+    this.name = name;
+  } 
+
+  //updates the ui because of notify()
+  void setAge(int age) {
+    this.index = index;
+    notify(this);
+  }
+
+}
+```
+
+
+#### 3. Add the StatefulProvider widget in the SECOND position of your tree under MaterialApp or CupertinoApp. Add your custom Model to the StatefulProvider.
+
+```dart
+void main() => runApp(
+  MaterialApp(
+    home: StatefulProvider(
+      store: MyModel(),
+      child: PageOne(),
+    ),
+  )
+);
+```
+
+
+### 4. Now inside your widget you can use your data with the StateProvider class:
+
+```dart
+StateProvider.of(context).getState<MyModel>().setAge(34)
+```
+
+
+
+
