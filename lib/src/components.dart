@@ -3,21 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:stateprovider/stateprovider.dart';
 
 class StatefulProvider<T> extends StatefulWidget {
-
   final Store<T> store;
   final Widget child;
 
-  StatefulProvider({
-    this.store,
-    this.child
-  });
+  StatefulProvider({this.store, this.child});
 
   @override
   _StatefulProviderState createState() => _StatefulProviderState();
 }
 
 class _StatefulProviderState extends State<StatefulProvider> {
-  
   @override
   void initState() {
     super.initState();
@@ -25,7 +20,7 @@ class _StatefulProviderState extends State<StatefulProvider> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     widget.store.dispose();
     super.dispose();
   }
@@ -34,14 +29,13 @@ class _StatefulProviderState extends State<StatefulProvider> {
   Widget build(BuildContext context) {
     return StreamBuilder<Store>(
       stream: widget.store.stream,
-      builder: (context,snapshot) {
-        if(snapshot.data != null) {
+      builder: (context, snapshot) {
+        if (snapshot.data != null) {
           return StateProvider(
             store: snapshot.data,
             child: widget.child,
           );
-        }
-        else {
+        } else {
           return Scaffold(
             body: Center(
               child: Text(""),
@@ -51,11 +45,9 @@ class _StatefulProviderState extends State<StatefulProvider> {
       },
     );
   }
-
 }
 
 class StateProvider extends InheritedWidget {
-  
   final Store store;
 
   T getState<T extends Store>() => store as T;
@@ -68,5 +60,4 @@ class StateProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(StateProvider old) => true;
-  
 }
