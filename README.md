@@ -12,7 +12,7 @@ import 'package:stateprovider/stateprovider.dart';
 ```
 
 
-#### 2. Create a Model which extends the StreamStore class. Add your custom attributes and functions. Call notify(this) in every function where you want to update the state.
+#### 2. Create a Model which extends the StreamStore class. Add your custom attributes and functions. Call notify() in every function where you want to update the state.
 
 ```dart
 class MyModel extends StreamStore<MyModel> {
@@ -28,7 +28,7 @@ class MyModel extends StreamStore<MyModel> {
   //updates the ui because of notify()
   void setAge(int age) {
     this.index = index;
-    notify(this);
+    notify();
   }
 
 }
