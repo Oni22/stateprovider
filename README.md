@@ -55,6 +55,11 @@ void main() => runApp(
 StateProvider.of(context).getState<MyModel>().setAge(34)
 ```
 
+### Additional
 
+if you want to update the state manually use:
 
+```dart
+StateProvider.of(context).getState<MyModel>().notify()
+```
 
