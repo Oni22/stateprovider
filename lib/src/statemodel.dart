@@ -2,14 +2,17 @@ import 'dart:async';
 
 class StreamStore<T> {
 
-  final _storeController = StreamController<T>();
-  Stream<T> get stream => _storeController.stream;
-  StreamSink get _sink => _storeController.sink;
+  final _streamController = StreamController<T>();
+  Stream<T> get stream => _streamController.stream;
+  StreamSink<T> get _sink => _streamController.sink;
 
-  void notify(T model) => _storeController.add(model);
+  void init(T model) {
+    _streamController.add(model);
+  }
+  void notify(T model) => _sink.add(model);
 
   void dispose(){
-    _storeController.close();
+    _streamController.close();
   }
 
 }
