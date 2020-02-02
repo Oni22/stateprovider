@@ -13,10 +13,10 @@ class StatefulProvider<T> extends StatefulWidget {
   });
 
   @override
-  _StatefulProviderState<T> createState() => _StatefulProviderState<T>();
+  _StatefulProviderState createState() => _StatefulProviderState();
 }
 
-class _StatefulProviderState<T> extends State<StatefulProvider> {
+class _StatefulProviderState extends State<StatefulProvider> {
   
   @override
   void initState() {
@@ -32,11 +32,11 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<StreamStore<T>>(
+    return StreamBuilder<StreamStore>(
       stream: widget.store.stream,
       builder: (context,snapshot) {
         if(snapshot.data != null) {
-          return StateProvider<T>(
+          return StateProvider(
             store: snapshot.data,
             child: widget.child,
           );
@@ -54,19 +54,19 @@ class _StatefulProviderState<T> extends State<StatefulProvider> {
 
 }
 
-class StateProvider<T> extends InheritedWidget {
+class StateProvider extends InheritedWidget {
   
-  final StreamStore<T> store;
+  final StreamStore store;
 
-  V getState<V>() => store as V;
+  T getState<T>() => store as T;
 
   StateProvider({Key key, this.store, Widget child})
       : super(key: key, child: child);
 
-  static StateProvider<T> of<T>(BuildContext context) =>
+  static StateProvider of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: StateProvider);
 
   @override
-  bool updateShouldNotify(StateProvider<T> old) => true;
+  bool updateShouldNotify(StateProvider old) => true;
   
 }
